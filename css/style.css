@@ -1,0 +1,209 @@
+.clear:before,
+.clear:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+.clear:after {
+    clear: both;
+}
+.fll{
+    float: left;
+}
+.flr {
+    float: right;
+}
+.dib{
+    display: inline-block;
+}
+html, body{
+    height: 100%;
+}
+.hidden{
+    display: none;
+}
+.aligned{
+    position: relative;
+    margin: 0 auto;
+}
+.mt20{
+    margin-top: 20px;
+}
+.white{
+    background-color: #fff;
+}
+
+body{
+    margin: 0;
+}
+
+
+/*    --------------- стили страницы       */
+.wrapper{
+    height: 100%;
+    position: relative;
+    background-image: url("../images/background/carbon_texture1882.jpg");
+    background-size: contain;
+}
+.container{
+    position: relative;
+    max-width: 1024px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+#header .logo{
+    display: inline-block;
+    float: left;
+    padding: 15px;
+    font-size: 26px;
+    color: #000;
+    font-weight: bold;
+}
+.userAuth{
+    float: right;
+}
+.userAuth .login,
+.userAuth .register{
+    position: relative;
+}
+.dropdown{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 8px;
+    border: 1px solid #39c3cc;
+    background: #ffffff;
+    z-index: 2;
+}
+.dropdown input{
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 10px;
+}
+.dropdown .submit button{
+    border: 1px solid #0f882d;
+    background: #23cdae;
+}
+.dropdown .submit{
+    text-align: center;
+}
+
+.userAuth .button{
+    background: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+.logout{
+    margin-right: 20px;
+}
+
+
+
+
+.archive{
+    float: left;
+    width: 10%;
+    display: inline-block;
+    padding: 15px;
+    border: 1px solid #ccc;
+}
+.archive ul{
+    padding: 0 0 0 10px;
+    margin: 0;
+}
+.currentMonth{
+    float: right;
+    display: block;
+    width: 75%;
+    position: relative;
+}
+.currentMonth table{
+   border-collapse: collapse;
+    width: 100%;
+}
+.currentMonth table,
+.currentMonth table tr,
+.currentMonth table td,
+.currentMonth table th{
+    border: 1px solid #999a9a;
+    text-align: center;
+}
+.currentMonth .income,
+.currentMonth .outgo{
+    width: 25%;
+}
+.currentMonth .income{
+    color: #0f882d;
+}
+.currentMonth .outgo{
+    color: #bb1311;
+}
+.currentMonth .number{
+    color: #acb1a4;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.icon-edit{
+    background-image: url("../images/icons/edit-editor-pen-pencil-write-icon-14.png");
+    opacity: .6;
+}
+.icon-edit:hover{
+    opacity: 1;
+}
+.icon-delete{
+    background-image: url("../images/icons/Remove-128.png");
+}
+.add_box{
+    width: 75%;
+    text-align: center;
+    padding: 15px 0;
+ }
+.add {
+    display: inline-block;
+    position: relative;
+    padding: 9px 15px;
+    margin-right: 20px;
+    border-radius: 5px;
+    color: #363636;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.add_income{
+    border: 1px solid #0f882d;
+    background: #caffad;
+}
+.add_outgo{
+    border: 1px solid #883e2e;
+    background: #ff3041;
+}
+.addSubmit{
+    border: 1px solid #000;
+    padding: 8px 22px;
+    background: #4DB9BD;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: .6s ease .05s;
+    border-radius: 5px;
+}.addSubmit:hover{
+     background: #1F7F83;
+}
+
+
