@@ -98,11 +98,12 @@ if(is_numeric($_GET['delete_post'])){
                    </form>
                </div>
            </div>
-           <?php $result_query = db_select("SELECT * from `posts` WHERE user_id = ".$_COOKIE['ID'], true)?>
+           <?php $result_query = db_select("SELECT * from `posts` WHERE user_id = ".$_COOKIE['ID']." LIMIT 500", true)?>
+           <?php var_dump($result_query);?>
            <div class="currentMonth mt20">
                <table class="white">
                    <tr>
-                       <th class="number">дата</th>
+                       <th class="number">Дата</th>
                        <th class="income">Доход</th>
                        <th class="outgo">Расход</th>
                        <th class="edit">редактировать</th>

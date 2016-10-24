@@ -10,7 +10,7 @@ if(!$authed){
 }
 
 $user_id = ($_COOKIE["ID"]) ? $_COOKIE["ID"] : null;
-$date = mktime();
+//$date = mktime();
 $income = (is_numeric($_POST["add_income"])) ? $_POST["add_income"] : null;
 $outgo = (is_numeric($_POST["add_outgo"])) ? $_POST["add_outgo"] : null;
 $post_id = $_POST['post_id'];
@@ -19,7 +19,7 @@ $where = "user_id='".$user_id."' AND ID='".$post_id."'";
 //Добавление
 if( isset($_POST["submit"]) && $_POST["method_name"] === "add" ){
     $array = [
-        "date"=>$date
+        "date"=>"NOW()"
         ,"user_id"=>$user_id
         ,"income"=>$income
         ,"outgo"=>$outgo
