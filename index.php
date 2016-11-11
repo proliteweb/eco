@@ -1,4 +1,5 @@
 <?php
+require_once "functions/DB.php";
 require_once "functions/path.php";
 require_once "functions/auth.php";//DB & proverki
 require_once "functions/edit_post.php";
@@ -29,50 +30,52 @@ if(is_numeric($_GET['delete_post'])){
 <head>
     <meta charset="UTF-8">
     <title>Менеджер расходов</title>
+    <link rel="stylesheet" href="css/foundation.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="wrapper">
     <header id="header">
-        <div class="container">
-            <div class="white clear">
+        <div class="row align-justify">
+            <div class="large-2 column">
                 <div class="logo"><a href="/">ECO</a></div>
-                <div class="userAuth clear mt20">
+            </div>
+            <div class="large-8 column">
+                <div class="row align-spaced">
                     <?php if(!$authed):?>
-                    <!--   авторизация-->
-                    <div class="login dib">
-<!--                        <a href="#" class="button">Войдите</a>-->
-                        <div id="auth" class="">
-                            <form  method="post" action="login.php">
-                                <input type="hidden" name="method_name" value="auth">
-                                <input type="text" name="name" placeholder="Имя" required="required">
-                                <input type="password" name="password" placeholder="пароль" required="required">
-                                <div class="submit">
-                                    <button>Вперед</button>
-                                </div>
-                            </form>
+                        <!--   авторизация-->
+                        <div class="login">
+                            <!--                        <a href="#" class="button">Войдите</a>-->
+                            <div id="auth" class="">
+                                <form  method="post" action="login.php">
+                                    <input type="hidden" name="method_name" value="auth">
+                                    <input type="text" name="name" placeholder="Имя" required="required">
+                                    <input type="password" name="password" placeholder="Пароль" required="required">
+                                    <div class="row align-center">
+                                        <button class="button success column small-8">Войти</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                    <span class="dib"> или </span>
-                    <!--                регистрация-->
-                    <div class="register dib">
-                        <a href="#" class="button">Зарегистрируйтесь</a>
-                        <div id="register" class="dropdown">
-                            <form  method="post" action="register.php">
-                                <input type="hidden" name="method_name" value="register">
-                                <input type="text" name="name" placeholder="Имя" required="required">
-                                <input type="email" name="email" placeholder="e-mail" required="required">
-                                <input type="password" name="password" placeholder="пароль" required="required">
-                                <div class="submit">
-                                    <button>Вперед</button>
-                                </div>
-                            </form>
+                        <!--                регистрация-->
+                        <div class="register">
+                            <a href="#" class="button">Зарегистрироваться</a>
+                            <div id="register" class="">
+                                <form  method="post" action="register.php">
+                                    <input type="hidden" name="method_name" value="register">
+                                    <input type="text" name="name" placeholder="Имя" required="required">
+                                    <input type="email" name="email" placeholder="E-mail" required="required">
+                                    <input type="password" name="password" placeholder="Пароль" required="required">
+                                    <div class="row align-center">
+                                        <button class="button small-8">Вперед</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
                     <?php else:?>
-                    <div class="logout">
-                        <a href="?logout=1">Выйти</a>
-                    </div>
+                        <div class="logout">
+                            <a href="?logout=1">Выйти</a>
+                        </div>
                     <?php endif;?>
                 </div>
             </div>
@@ -99,7 +102,7 @@ if(is_numeric($_GET['delete_post'])){
                </div>
            </div>
            <?php $result_query = db_select("SELECT * from `posts` WHERE user_id = ".$_COOKIE['ID']." LIMIT 500", true)?>
-           <?php var_dump($result_query);?>
+           <?php// var_dump($result_query);?>
            <div class="currentMonth mt20">
                <table class="white">
                    <tr>
@@ -128,6 +131,7 @@ if(is_numeric($_GET['delete_post'])){
 </div>
 
 <script src="js/jquery-2.2.4.min.js"></script>
+<script src="js/vendor/foundation.min.js"></script>
 <script src="js/index.js"></script>
 
 

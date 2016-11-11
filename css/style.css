@@ -59,48 +59,16 @@ body{
 
 #header .logo{
     display: inline-block;
-    float: left;
     padding: 15px;
     font-size: 26px;
     color: #000;
     font-weight: bold;
 }
-.userAuth{
-    float: right;
-}
-.userAuth .login,
-.userAuth .register{
-    position: relative;
-}
-.dropdown{
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    padding: 8px;
-    border: 1px solid #39c3cc;
-    background: #ffffff;
-    z-index: 2;
-}
-.dropdown input{
-    display: inline-block;
-    margin-top: 8px;
-    padding: 5px 10px;
-}
-.dropdown .submit button{
-    border: 1px solid #0f882d;
-    background: #23cdae;
-}
-.dropdown .submit{
-    text-align: center;
-}
 
-.userAuth .button{
-    background: transparent;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
+
+#register{
+    height: 0;
+    overflow: hidden;
 }
 .logout{
     margin-right: 20px;
