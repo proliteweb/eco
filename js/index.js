@@ -1,25 +1,18 @@
 $(document).ready( function() {
 
-    //$("button.button").on("click", function(){
-    //    $(this).next().slideToggle(100);
-    //});
-
-    $(" form button ").on('click', function(){
-        var data = $(this).parents('form').serialize();
-        $.post(
-            "login.php",
-            data,
-            onAjaxSuccess
-        );
-        function onAjaxSuccess(data){
-            $.evalJSON(data);
-            if( data['authed'] == true ){
-                alert(data);
-            }else {
-                alert("Введены не правильные данные");
-            }
-        }
+    $('form').submit(function(e) {
+        var $form = $(this);
+        $.ajax({
+            type: $form.attr('method'),
+            url: $form.attr('action'),
+            data: $form.serialize()
+        }).done(function() {
+            console.log('success');
+        }).fail(function() {
+            console.log('fail');
+        });
+        //отмена действия по умолчанию для кнопки submit
+        e.preventDefault();
     });
-
 
 });

@@ -1,7 +1,7 @@
 <?php
+require_once "DB.php";
 
-//Функции для разного уровня экранизации
-
+//Функции для разного уровня экранирования
 /**
  * Максимальный экран
  * @param $str
@@ -27,3 +27,8 @@ function proverka2($str){
     return $str;
 }
 
+function sql_send_filter($string){
+    global $DB;
+    $string = $DB->real_escape_string($string);
+    return $string;
+}

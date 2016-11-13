@@ -19,10 +19,7 @@ if($_GET['logout'] == 1){
 if($_GET['method']=='edit' && $_GET['edit_post']){
     $edit_post_data = edit_post($_COOKIE['ID'], $_GET['edit_post']);
 }
-//Удаление поста
-if(is_numeric($_GET['delete_post'])){
-    $res_delete = db_delete("posts", "user_id='".$user_id."' AND ID='".$_GET['delete_post']."' ", true);
-}
+
 ?>
 
 <!doctype html>
@@ -45,9 +42,7 @@ if(is_numeric($_GET['delete_post'])){
                     <?php if(!$authed):?>
                         <!--   авторизация-->
                         <div class="login">
-                            <!--                        <a href="#" class="button">Войдите</a>-->
-                            <div id="auth" class="">
-                                <form  method="post" action="login.php">
+                                <form id="auth" method="post" action="login.php">
                                     <input type="hidden" name="method_name" value="auth">
                                     <input type="text" name="name" placeholder="Имя" required="required">
                                     <input type="password" name="password" placeholder="Пароль" required="required">
@@ -55,7 +50,6 @@ if(is_numeric($_GET['delete_post'])){
                                         <button class="button success column small-8">Войти</button>
                                     </div>
                                 </form>
-                            </div>
                         </div>
                         <!--                регистрация-->
                         <div class="register">
@@ -67,7 +61,7 @@ if(is_numeric($_GET['delete_post'])){
                                     <input type="email" name="email" placeholder="E-mail" required="required">
                                     <input type="password" name="password" placeholder="Пароль" required="required">
                                     <div class="row align-center">
-                                        <button class="button small-8">Вперед</button>
+                                        <button class="button small-8">Зарегистрироваться</button>
                                     </div>
                                 </form>
                             </div>
@@ -102,7 +96,6 @@ if(is_numeric($_GET['delete_post'])){
                </div>
            </div>
            <?php $result_query = db_select("SELECT * from `posts` WHERE user_id = ".$_COOKIE['ID']." LIMIT 500", true)?>
-           <?php// var_dump($result_query);?>
            <div class="currentMonth mt20">
                <table class="white">
                    <tr>
@@ -132,7 +125,7 @@ if(is_numeric($_GET['delete_post'])){
 
 <script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/vendor/foundation.min.js"></script>
-<script src="js/index.js"></script>
+<script src="js/indexs.js"></script>
 
 
 

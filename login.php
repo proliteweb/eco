@@ -1,32 +1,19 @@
 <?php
+require_once "functions/DB.php";
 require_once "functions/proverki.php";
 require_once "functions/path.php";
-require_once "functions/DB.php";
-
 
 
 //Залогиниваем
 if($_POST["method_name"] === "auth"){
-    $resDb = db_row("SELECT * FROM users WHERE name='".$_POST["name"]."' AND password='".md5($_POST["password"])."'", true )["item"];
-    if(!$resDb){exit("Ощибка при работе с БД на строке ".__LINE__);}
-    else{
-        setcookie("ID", $resDb["ID"], strtotime("+1 day"));
-        setcookie("token", $resDb["password"], strtotime("+1 day"));?>
-        <script>window.location = "index.php"</script>
-   <? }
+    $name = ($_POST['name']) ? proverka1(trim($_POST['name'])) : null;
+    $password = ($_POST['password']) ? proverka1( md5 (trim($_POST['password']) ) ) : null;
+
+    $resDb = db_row("SELECT * FROM users WHERE name='".$name."' AND password='".$password."'", true )["item"];
+    //Если результат true, то все 200 ОК )
+//    var_dump($resDb);
+    echo $password;
+    if($resDb['name'] === $name AND $resDb['password'] === $password){
+        var_dump($resDb);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
