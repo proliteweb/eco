@@ -61,7 +61,7 @@ if($_GET['method']=='edit' && $_GET['edit_post']){
                                     <input type="email" name="email" placeholder="E-mail" required="required">
                                     <input type="password" name="password" placeholder="Пароль" required="required">
                                     <div class="row align-center">
-                                        <button class="button small-8">Зарегистрироваться</button>
+                                        <button class="button small-9">Зарегистрироваться</button>
                                     </div>
                                 </form>
                             </div>

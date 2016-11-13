@@ -4,6 +4,7 @@ require_once "functions/path.php";
 require_once "functions/DB.php";
 
 
+//TODO сделать проверку имени и пароля через preg_match
 //TODO зарегать и поставить куки через JS, и редирект по setTimeOut
 //Регистрируем
 $data = array();

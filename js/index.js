@@ -21,6 +21,9 @@ $(document).ready( function() {
 
         document.cookie = cookie_string;
     }
+    function send_error($string){
+        //TODO вывести текст ошибки
+    }
 
     $('form').submit(function(e) {
         var $form = $(this);
@@ -31,22 +34,29 @@ $(document).ready( function() {
         }).done(function($data) {
 
             $data = $.parseJSON($data);
-            $data.forEach(function($item, $num, $data){
-                var name = $item['name']
-                    ,value = $item['value']
-                    ,exp_y = $item['exp_y']
-                    ,exp_m = $item['exp_m']
-                    ,exp_d = $item['exp_d']
-                    ,path = $item['path']
-                    ,domain = $item['domain']
-                set_cookie(name, value, exp_y, exp_m, exp_d, path, domain, "");
-            });
-
-
+            if($data['error']){
+                //Если есть ощибка, выводим пользователю
+                send_error($data['error']);
+            }
+            //Ставим куки
+            else{
+                $data.forEach(function($item, $num, $data){
+                    var name = $item['name']
+                        ,value = $item['value']
+                        ,exp_y = $item['exp_y']
+                        ,exp_m = $item['exp_m']
+                        ,exp_d = $item['exp_d']
+                        ,path = $item['path']
+                        ,domain = $item['domain']
+                    set_cookie(name, value, exp_y, exp_m, exp_d, path, domain, "");
+                });
+            }
+            //Обновляем страницу(редирект на главную)
+            window.location = "http://" + $data[0]['domain'];
         }).fail(function() {
             console.log('fail');
         });
-        //отмена действия по умолчанию для кнопки submit
+        //Отмена действия по умолчанию для кнопки submit
         e.preventDefault();
     });
 

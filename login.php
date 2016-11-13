@@ -7,13 +7,16 @@ require_once "functions/path.php";
 //Залогиниваем
 if($_POST["method_name"] === "auth"){
     $for_return = [];
-    //TODO сделать проверку имени и пароля через preg_match
     $name = ($_POST['name']) ? proverka1(trim($_POST['name'])) : null;
     $password = ($_POST['password']) ? md5( proverka1 (trim($_POST['password']) ) ) : null;
 
     $resDb = db_row("SELECT * FROM users WHERE name='".$name."' AND password='".$password."'", true )["item"];
-    //Если результат true, то все 200 ОК )
-    if($resDb['name'] === $name AND $resDb['password'] === $password){
+
+    if($resDb['name'] !== $name OR $resDb['password'] !== $password){
+        $for_return['error'] = "Не правильный логин или пароль!";
+    }
+    //Если все ОК , то формируем данные для куки)
+    else{
         //временная метка с датой истечения срока жизни куки
         $exp_date = strtotime(" + 1 week");
 
@@ -37,14 +40,11 @@ if($_POST["method_name"] === "auth"){
                 , "domain"=>$_SERVER['HTTP_HOST']
             ]
         ];
-        $for_return = json_encode($for_return);
-        echo $for_return;
-    }
+    }//endif
+    //возвращаем результат
+    $for_return = json_encode($for_return);
+    echo $for_return;
 }
-
-//name, value, exp_y, exp_m, exp_d, path, domain
-
-
 
 
 
