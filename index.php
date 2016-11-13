@@ -125,7 +125,7 @@ if($_GET['method']=='edit' && $_GET['edit_post']){
 
 <script src="js/jquery-2.2.4.min.js"></script>
 <script src="js/vendor/foundation.min.js"></script>
-<script src="js/indexs.js"></script>
+<script src="js/index.js"></script>
 
 
 
