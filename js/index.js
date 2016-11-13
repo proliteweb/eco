@@ -1,4 +1,6 @@
 $(document).ready( function() {
+    //Кидаем фокус на input
+    $('#auth input[type="text"]').focus();
 
     function set_cookie ( name, value, exp_y, exp_m, exp_d, path, domain, secure )
     {
@@ -21,8 +23,12 @@ $(document).ready( function() {
 
         document.cookie = cookie_string;
     }
-    function send_error($string){
-        //TODO вывести текст ошибки
+    function send_error($string, $form){
+        //Выводим тект ошибки на 5 сек, после чего удаляем
+        $form.append('<div class="alert callout absolute"><p>'+ $string +'</p></div>');
+        $('.alert.callout').delay(5000).fadeOut("fast").queue(function(e){
+            $(this).remove();
+        });
     }
 
     $('form').submit(function(e) {
@@ -36,7 +42,7 @@ $(document).ready( function() {
             $data = $.parseJSON($data);
             if($data['error']){
                 //Если есть ощибка, выводим пользователю
-                send_error($data['error']);
+                send_error($data['error'], $form);
             }
             //Ставим куки
             else{

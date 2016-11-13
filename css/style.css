@@ -21,6 +21,9 @@ a:hover{
 .dib{
     display: inline-block;
 }
+.absolute{
+    position: absolute;
+}
 html, body{
     min-height: 100%;
 	height: 100%;
