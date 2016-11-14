@@ -6,7 +6,7 @@ function is_auth(){
     $token = proverka1($_COOKIE["token"]);
     if(!is_numeric($_COOKIE["ID"]) || !$token){return false;}
 
-    $resDb = db_row("SELECT ID FROM users WHERE ID='".$_COOKIE["ID"]."' AND password='".$token."'", true )["item"];
+    $resDb = db_row("SELECT ID FROM users WHERE ID='".$_COOKIE["ID"]."' AND token='".$token."'", true )["item"];
     return $resDb;
 }
 

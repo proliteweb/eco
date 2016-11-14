@@ -7,12 +7,13 @@ require_once "functions/cookies.php";
 
 
 //Залогиниваем
-if($_POST["method_name"] === "auth" AND !empty($_POST["method_name"])){
+if($_GET["method_name"] === "auth"){
     $for_return = [];
-    $email = (filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL) ) ? $_POST['email'] : null;
-    $password = ($_POST['password']) ? md5( proverka1 (trim($_POST['password']) ) ) : null;
+    $email = (filter_var( $_GET['email'], FILTER_VALIDATE_EMAIL) ) ? $_GET['email'] : null;
+    $password = ($_GET['password']) ? md5( proverka1 (trim($_GET['password']) ) ) : null;
 
     $resDb = db_row("SELECT * FROM users WHERE email='".$email."' AND token='".$password."'", true )["item"];
+//    $for_return['error'] = $email.$password;
 
     if($resDb['email'] !== $email OR $resDb['token'] !== $password){
         $for_return['error'] = "Не правильный логин или пароль!";
@@ -20,7 +21,7 @@ if($_POST["method_name"] === "auth" AND !empty($_POST["method_name"])){
     //Если все ОК , то формируем данные для куки)
     else{
         $arr_names = [
-             0=>"ID"
+            0=>"ID"
             ,1=>"token"
         ];
         $for_return = set_cookie_ajax($arr_names, $resDb);
@@ -29,14 +30,3 @@ if($_POST["method_name"] === "auth" AND !empty($_POST["method_name"])){
     $for_return = json_encode($for_return);
     echo $for_return;
 }
-
-
-
-
-
-
-
-
-
-
-

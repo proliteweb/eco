@@ -38,13 +38,13 @@ if($_GET['method']=='edit' && $_GET['edit_post']){
                 <div class="logo"><a href="/">ECO</a></div>
             </div>
             <div class="large-8 column">
-                <div class="row align-spaced">
+                <div class="row align-spaced mt20">
                     <?php if(!$authed):?>
                         <!--   авторизация-->
                         <div class="login">
                                 <form id="auth" method="post" action="login.php">
                                     <input type="hidden" name="method_name" value="auth">
-                                    <input type="text" name="name" placeholder="Имя" required="required">
+                                    <input type="text" name="email" placeholder="Email" required="required">
                                     <input type="password" name="password" placeholder="Пароль" required="required">
                                     <div class="row align-center">
                                         <button class="button success column small-8">Войти</button>

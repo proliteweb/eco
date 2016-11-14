@@ -1,35 +1,38 @@
 <?php
+require_once "functions/DB.php";
 require_once "functions/proverki.php";
 require_once "functions/path.php";
-require_once "functions/DB.php";
+require_once "functions/cookies.php";
 
 
 //TODO сделать проверку имени и пароля через preg_match
 //TODO зарегать и поставить куки через JS, и редирект по setTimeOut
+
 //Регистрируем
-$data = array();
-if($_POST["method_name"] === "register"){
-    $username = (isset($_POST["name"]))? trim(proverka1($_POST["name"])) : null;
-    $password = (isset($_POST["password"])) ? md5(trim(proverka1($_POST["password"]))) : null;
-    $email = filter_var(strtolower($_POST["email"]), FILTER_VALIDATE_EMAIL);
-    //если один из параметров не верный, возвращаем false
-    if(!$username || !$password || !$email){
-        $data["authed"] = false;
-    }else{
-        $resDb = db_insert("users", ["name"=>$username, "password"=>$password, "email"=>$email], true);
-        setcookie('ID', $resDb["ID"], strtotime("+1 week"));
-        setcookie('token', $password, strtotime("+1 week"));
-        $redirect = true;
+
+if($_POST["method_name"] === "register" AND !empty($_POST["method_name"])){
+    $for_return = [];
+
+    $name = ( preg_match("/^[a-z]+$/i", $_POST['name']) ) ? proverka1( trim($_POST['name']) ) : null;
+    $email = ($_POST['email']) ? trim($_POST['email']) : "";
+    $password = (preg_match("/^[0-9a-z]+$/i", $_POST['password'])) ? md5( proverka1 (trim($_POST['password']) ) ) : $for_return['error'] = "Не допустимые символы в пароле";
+
+//    $resDb = db_row("SELECT * FROM users WHERE name='".$name."' AND token='".$password."'", true )["item"];
+
+    if($resDb['name'] !== $name OR $resDb['token'] !== $password){
+        $for_return['error'] = "Не правильный логин или пароль!";
     }
+    //Если все ОК , то формируем данные для куки)
+    else{
+        $arr_names = [
+            0=>"ID"
+            ,1=>"token"
+        ];
+        $for_return = set_cookie_ajax($arr_names, $resDb);
+    }//endif
+    //возвращаем результат
+    $for_return = json_encode($for_return);
+    echo $for_return;
 }
+
 ?>
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Регистрация</title>
-</head>
-<body>
-<? if($redirect){echo "<script>window.location = 'index.php';</script>"; }?>
-</body>
-</html>
